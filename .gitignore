@@ -1,3 +1,10 @@
+# env
 venv/
+
+# IDE
 .vscode
 .idea
+
+# mac only
+.DS_Store
+
