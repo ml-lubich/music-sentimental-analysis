@@ -8,3 +8,4 @@ venv/
 # mac only
 .DS_Store
 
+**/__pycache__
