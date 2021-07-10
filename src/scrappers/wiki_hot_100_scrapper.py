@@ -16,6 +16,9 @@ class WikiHot100Scrapper:
             start_year (int): start year bound for the scrapper.
             end_year (int): end year bound for the scrapper.
         """
+        if end_year < start_year:
+            end_year = start_year
+        
         self.start_year = self.check_bound_year(start_year)
         self.end_year = self.check_bound_year(end_year)
 
