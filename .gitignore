@@ -8,3 +8,6 @@ venv/
 # mac only
 .DS_Store
 
+# generated file
+**/__pycache__
+billboard_top_100.csv
