@@ -35,6 +35,7 @@ flowchart LR
 - [Use Cases](#use-cases)
 - [Config](#config)
 - [Setup & Running](#setup--running)
+- [🗺️ Repository map](#️-repository-map)
 
 ## Generation pipeline (algorithm)
 
@@ -109,3 +110,21 @@ To run and generate the dataset, the following steps must be followed:
 2. Get dependencies with `pip3 install -r requirements.txt`
 3. Setup config as [described](#config).
 4. Run the script with `python3 run.py`. *Note that this step could take few hours*.
+
+
+## 🗺️ Repository map
+
+Top-level layout of `music-sentimental-analysis` rendered as a Mermaid mindmap (auto-generated from the on-disk tree).
+
+```mermaid
+mindmap
+  root((music-sentimental-analysis))
+    src/
+      __init__.py
+      config.py
+      run.py
+      scrappers
+    files
+      README.md
+      requirements.txt
+```
