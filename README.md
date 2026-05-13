@@ -1,5 +1,38 @@
-# **Time Machine Track(TMTrack) Dataset Generator**
-Dataset generator for The Hot 100 billboard standard. Uses Wikipedia as the source for the track for a given year.
+# **Time Machine Track (TMTrack) Dataset Generator**
+
+> Dataset generator for The Hot 100 Billboard standard. Uses Wikipedia
+> as the source for tracks per year (1946–2020), then resolves the
+> YouTube URL of the instrumental version per song.
+
+```mermaid
+flowchart LR
+    CFG[("⚙ config.py<br/>OUTPUT_DIR · START_YEAR · END_YEAR")]
+    RUN{{"🚀 run.py"}}
+    WIKI["📚 Wikipedia<br/>Hot 100 lookup"]
+    PARSE["🔍 parse year tables<br/>artist + song"]
+    YT["🔗 YouTube search<br/>instrumental URL"]
+    CSV[/"📄 billboard_top_100.csv<br/>year · artist · song · url"/]
+
+    CFG --> RUN
+    RUN --> WIKI --> PARSE --> YT --> CSV
+
+    classDef io fill:#0e1116,stroke:#2f81f7,stroke-width:1.5px,color:#e6edf3;
+    classDef tool fill:#161b22,stroke:#3fb950,stroke-width:1.5px,color:#e6edf3;
+    classDef brain fill:#161b22,stroke:#d29922,stroke-width:1.5px,color:#e6edf3;
+    classDef out fill:#0e1116,stroke:#a371f7,stroke-width:1.5px,color:#e6edf3;
+    class CFG,WIKI io;
+    class PARSE,YT tool;
+    class RUN brain;
+    class CSV out;
+```
+
+## Table of contents
+
+- [Generated Metadata](#generated-metadata)
+- [Dataset Schema](#dataset-schema)
+- [Use Cases](#use-cases)
+- [Config](#config)
+- [Setup & Running](#setup--running)
 
 ## **Generated Metadata**
 The generator makes use of Wikipedia to get the Hot 100 songs from 1946-2020. Once the song and artist is known, a Youtube link of the instrumental version of the song is fetched and is appended to each record. The csv will be dumped as `billboard_top_100.csv` to the directory that is specified in [config](#config).
