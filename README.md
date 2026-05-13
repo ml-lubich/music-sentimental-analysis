@@ -29,10 +29,50 @@ flowchart LR
 ## Table of contents
 
 - [Generated Metadata](#generated-metadata)
+- [Generation pipeline (algorithm)](#generation-pipeline-algorithm)
+- [Per-year scrape sequence](#per-year-scrape-sequence)
 - [Dataset Schema](#dataset-schema)
 - [Use Cases](#use-cases)
 - [Config](#config)
 - [Setup & Running](#setup--running)
+
+## Generation pipeline (algorithm)
+
+```mermaid
+flowchart LR
+    A([run.py])
+    B["read config<br/>START_YEAR → END_YEAR"]
+    C{"more years?"}
+    D["fetch Wikipedia<br/>Hot 100 page for year"]
+    E["parse table rows<br/>(artist, song)"]
+    F["per song:<br/>build YouTube search URL"]
+    G["resolve instrumental link<br/>(empty if not found)"]
+    H["append row → CSV"]
+    I["write billboard_top_100.csv"]
+    Z([done])
+    A --> B --> C
+    C -- yes --> D --> E --> F --> G --> H --> C
+    C -- no  --> I --> Z
+```
+
+## Per-year scrape sequence
+
+```mermaid
+sequenceDiagram
+    participant R as run.py
+    participant W as Wikipedia
+    participant Y as YouTube
+    participant F as CSV writer
+
+    R->>W: GET /wiki/Billboard_Year-End_Hot_100_<year>
+    W-->>R: HTML
+    R->>R: BeautifulSoup parse table
+    loop per (artist, song)
+        R->>Y: search instrumental URL
+        Y-->>R: top result URL
+        R->>F: append row
+    end
+```
 
 ## **Generated Metadata**
 The generator makes use of Wikipedia to get the Hot 100 songs from 1946-2020. Once the song and artist is known, a Youtube link of the instrumental version of the song is fetched and is appended to each record. The csv will be dumped as `billboard_top_100.csv` to the directory that is specified in [config](#config).
