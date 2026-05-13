@@ -36,6 +36,7 @@ flowchart LR
 - [Config](#config)
 - [Setup & Running](#setup--running)
 - [🗺️ Repository map](#️-repository-map)
+- [📊 Code composition](#-code-composition)
 
 ## Generation pipeline (algorithm)
 
@@ -127,4 +128,16 @@ mindmap
     files
       README.md
       requirements.txt
+```
+
+
+## 📊 Code composition
+
+File-type breakdown of source under this repo (skips `.git`, `node_modules`, build caches, lockfiles).
+
+```mermaid
+pie showData title File-type composition of music-sentimental-analysis (8 files)
+    "Python" : 6
+    "Text" : 1
+    "Markdown" : 1
 ```
